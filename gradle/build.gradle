@@ -1,0 +1,11 @@
+task copy(type: Copy) {
+	from 'resources'
+	from 'build'
+	into 'target'
+	include '**/*.txt'
+	exclude { detail -> 
+		detail.file.name.endsWith('.xml')
+	}
+	rename '(.+)-staging-(.+)', '$1$2'
+	expand(copyright: '2009', version: '2.3.1')
+}
