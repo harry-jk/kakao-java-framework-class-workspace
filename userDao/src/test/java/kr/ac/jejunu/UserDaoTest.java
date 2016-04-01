@@ -13,7 +13,7 @@ import java.sql.SQLException;
 public class UserDaoTest {
     @Test
     public void get() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new UserDao(new SimpleConnectionMaker());
+        UserDao userDao = new DaoFactory().getUserDao();
 
         Long id = 1L;
         String name = "허윤호";
@@ -36,7 +36,7 @@ public class UserDaoTest {
         user.setName(name);
         user.setPassword(password);
 
-        UserDao userDao = new UserDao(new SimpleConnectionMaker());
+        UserDao userDao = new DaoFactory().getUserDao();
         Long id = userDao.add(user);
 
         User resultUesr = userDao.get(id);
