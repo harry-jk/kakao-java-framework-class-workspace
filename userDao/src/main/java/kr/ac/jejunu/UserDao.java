@@ -7,8 +7,10 @@ import java.sql.*;
  * Created by jhkang on 3/25/16.
  */
 public class UserDao {
+    private final SimpleConnectionMaker simpleConnectionMaker = new SimpleConnectionMaker();
+
     public User get(Long id) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = simpleConnectionMaker.getConnection();
 
         String sql = "select * from userinfo where id = ?";
 
@@ -31,7 +33,7 @@ public class UserDao {
     }
 
     public Long add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = simpleConnectionMaker.getConnection();
 
         String sql = "insert into userinfo (name, password) values (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -59,11 +61,5 @@ public class UserDao {
         resultSet.close();
         preparedStatement2.close();
         return id;
-    }
-
-    public Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.jdbc.Driver");
-        return DriverManager.getConnection("jdbc:mysql://db.skyserv.kr/jejunu?characterEncoding=utf8",
-                "jeju", "jejupw");
     }
 }
