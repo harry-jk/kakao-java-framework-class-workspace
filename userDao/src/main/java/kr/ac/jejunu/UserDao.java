@@ -7,10 +7,14 @@ import java.sql.*;
  * Created by jhkang on 3/25/16.
  */
 public class UserDao {
-    private final SimpleConnectionMaker simpleConnectionMaker = new SimpleConnectionMaker();
+    private final ConnectionMaker connectionMaker;
+
+    public UserDao(ConnectionMaker connectionMaker) {
+        this.connectionMaker = connectionMaker;
+    }
 
     public User get(Long id) throws ClassNotFoundException, SQLException {
-        Connection connection = simpleConnectionMaker.getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         String sql = "select * from userinfo where id = ?";
 
@@ -33,7 +37,7 @@ public class UserDao {
     }
 
     public Long add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = simpleConnectionMaker.getConnection();
+        Connection connection = connectionMaker.getConnection();
 
         String sql = "insert into userinfo (name, password) values (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
