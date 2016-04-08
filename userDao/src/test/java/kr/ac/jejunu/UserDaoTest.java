@@ -3,7 +3,10 @@ package kr.ac.jejunu;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 import java.sql.SQLException;
 
@@ -11,19 +14,27 @@ import java.sql.SQLException;
  * Created by jhkang on 3/25/16.
  */
 public class UserDaoTest {
+    private UserDao userDao;
+
+    @Before
+    public void setUp() {
+//        ApplicationContext applicationContext
+//                = new AnnotationConfigApplicationContext(DaoFactory.class);
+        ApplicationContext applicationContext
+                = new GenericXmlApplicationContext("daoFactory.xml");
+//        userDao = new DaoFactory().userDao();
+        userDao = (UserDao) applicationContext.getBean("userDao");
+    }
+
     @Test
     public void get() throws SQLException, ClassNotFoundException {
-        UserDao userDao = new DaoFactory().getUserDao();
-
         Long id = 1L;
         String name = "허윤호";
         String password = "1234";
 
         User user = userDao.get(id);
 
-        assertThat(user.getId(), is(id));
-        assertThat(user.getName(), is(name));
-        assertThat(user.getPassword(), is(password));
+        validate(id, name, password, user);
     }
 
     @Test
@@ -36,13 +47,17 @@ public class UserDaoTest {
         user.setName(name);
         user.setPassword(password);
 
-        UserDao userDao = new DaoFactory().getUserDao();
         Long id = userDao.add(user);
-
         User resultUesr = userDao.get(id);
 
-        assertThat(resultUesr.getId(), is(id));
-        assertThat(resultUesr.getName(), is(name));
-        assertThat(resultUesr.getPassword(), is(password));
+        validate(id, name, password, resultUesr);
     }
+
+
+    private void validate(Long id, String name, String password, User user) {
+        assertThat(user.getId(), is(id));
+        assertThat(user.getName(), is(name));
+        assertThat(user.getPassword(), is(password));
+    }
+
 }
