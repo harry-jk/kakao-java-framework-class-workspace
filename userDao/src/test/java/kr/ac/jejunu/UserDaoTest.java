@@ -48,9 +48,9 @@ public class UserDaoTest {
         user.setPassword(password);
 
         Long id = userDao.add(user);
-        User resultUesr = userDao.get(id);
+        User resultUser = userDao.get(id);
 
-        validate(id, name, password, resultUesr);
+        validate(id, name, password, resultUser);
     }
 
 
