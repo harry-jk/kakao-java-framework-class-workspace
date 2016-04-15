@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
-import java.sql.SQLException;
 
 /**
  * Created by jhkang on 3/25/16.
@@ -18,16 +17,13 @@ public class UserDaoTest {
 
     @Before
     public void setUp() {
-//        ApplicationContext applicationContext
-//                = new AnnotationConfigApplicationContext(DaoFactory.class);
         ApplicationContext applicationContext
                 = new GenericXmlApplicationContext("daoFactory.xml");
-//        userDao = new DaoFactory().userDao();
         userDao = (UserDao) applicationContext.getBean("userDao");
     }
 
     @Test
-    public void get() throws SQLException, ClassNotFoundException {
+    public void get() {
         Long id = 1L;
         String name = "허윤호";
         String password = "1234";
@@ -38,7 +34,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void add() throws SQLException, ClassNotFoundException {
+    public void add() {
         User user = new User();
 
         String name = "헐크";
@@ -54,7 +50,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void deleted() throws SQLException, ClassNotFoundException {
+    public void deleted() {
         User user = new User();
 
         String name = "헐크";
@@ -72,7 +68,7 @@ public class UserDaoTest {
     }
 
     @Test
-    public void update() throws SQLException, ClassNotFoundException {
+    public void update() {
         User user = new User();
 
         String name = "헐크";
