@@ -1,12 +1,13 @@
 package kr.ac.jejunu;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class JdbcContext {
-    private ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
     public JdbcContext() {
     }
@@ -18,7 +19,7 @@ public class JdbcContext {
         User user = null;
 
         try {
-            connection = connectionMaker.getConnection();
+            connection = dataSource.getConnection();
             preparedStatement = statementStrategy.makeStatement(connection);
 
             resultSet = preparedStatement.executeQuery();
@@ -28,9 +29,6 @@ public class JdbcContext {
                 user.setName(resultSet.getString("name"));
                 user.setPassword(resultSet.getString("password"));
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -68,15 +66,12 @@ public class JdbcContext {
         Long id = null;
 
         try {
-            connection = connectionMaker.getConnection();
+            connection = dataSource.getConnection();
             preparedStatement = statementStrategy.makeStatement(connection);
 
             preparedStatement.executeUpdate();
 
             id = getLastInsertId(connection);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -105,12 +100,9 @@ public class JdbcContext {
         PreparedStatement preparedStatement = null;
 
         try {
-            connection = connectionMaker.getConnection();
+            connection = dataSource.getConnection();
             preparedStatement = statementStrategy.makeStatement(connection);
             preparedStatement.executeUpdate();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            throw e;
         } catch (SQLException e) {
             e.printStackTrace();
             throw e;
@@ -159,7 +151,7 @@ public class JdbcContext {
         return id;
     }
 
-    public void setConnectionMaker(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 }
