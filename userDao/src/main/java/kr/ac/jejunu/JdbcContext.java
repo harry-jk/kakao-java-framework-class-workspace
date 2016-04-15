@@ -133,6 +133,19 @@ public class JdbcContext {
         }
     }
 
+    public void update(String sql, Object[] objs) throws ClassNotFoundException, SQLException {
+        StatementStrategy statementStrategy = (Connection connection) -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            for(int i = 1; i <= objs.length; ++i) {
+                preparedStatement.setObject(i, objs[i-1]);
+            }
+            return preparedStatement;
+        };
+        jdbcContextWithStatementStrategyForUpdate(statementStrategy);
+    }
+
+
+
     Long getLastInsertId(Connection connection) throws SQLException {
         PreparedStatement preparedStatement2 = connection.prepareStatement(
                 "select last_insert_id()");
