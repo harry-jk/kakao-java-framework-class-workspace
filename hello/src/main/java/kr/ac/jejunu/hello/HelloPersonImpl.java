@@ -1,10 +1,17 @@
 package kr.ac.jejunu.hello;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 /**
  * Created by jhkang on 5/13/16.
  */
+@Component
 public class HelloPersonImpl implements HelloPerson {
+    @Value("Harry")
     private String name;
+    @Autowired
     private Hello hello;
 
     @Override
