@@ -9,6 +9,9 @@
     <listener>
         <listener-class>kr.ac.jejunu.servlet.HelloContextListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>kr.ac.jejunu.servlet.HelloRequestListener</listener-class>
+    </listener>
     
     <servlet>
         <servlet-name>helloServlet</servlet-name>
