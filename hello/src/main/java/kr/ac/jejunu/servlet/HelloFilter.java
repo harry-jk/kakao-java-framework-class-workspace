@@ -4,11 +4,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 /**
  * Created by jhkang on 5/13/16.
  */
+@WebFilter(urlPatterns = "/*")
 public class HelloFilter implements Filter {
     private final static Logger logger = LoggerFactory.getLogger(HelloFilter.class);
 
