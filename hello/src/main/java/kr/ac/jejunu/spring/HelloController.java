@@ -83,15 +83,23 @@ public class HelloController {
         return new HelloModel();
     }
 
-    @RequestMapping("sessionattribute")
+    @RequestMapping("/sessionattribute")
     public String hello8(HelloModel model) {
         model.setHello("Hello");
         model.setName("harry");
         return "/spring/hellomodel";
     }
 
-    @RequestMapping("sessionattributevalue")
+    @RequestMapping("/sessionattributevalue")
     public String hello9(HelloModel model) {
         return "/spring/hellomodel";
+    }
+
+    @RequestMapping("/returnmodel")
+    public HelloModel hello10() {
+        HelloModel model = new HelloModel();
+        model.setHello("Hi");
+        model.setName("Harry");
+        return model;
     }
 }
