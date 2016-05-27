@@ -39,4 +39,11 @@
             </beans:list>
         </beans:property>
     </beans:bean>
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/*"/>
+            <beans:bean class="kr.ac.jejunu.spring.HelloInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>
