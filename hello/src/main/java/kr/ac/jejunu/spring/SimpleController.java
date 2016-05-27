@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by jhkang on 5/13/16.
  */
-@Controller("/simple")
+@Controller("abc")
 public class SimpleController implements org.springframework.web.servlet.mvc.Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
