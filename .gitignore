@@ -61,3 +61,4 @@ fabric.properties
 gradle/.idea/
 hello/.idea/
 hello/build/
+hello/.gradle
