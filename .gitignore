@@ -62,3 +62,4 @@ gradle/.idea/
 hello/.idea/
 hello/build/
 hello/.gradle
+hello/src/main/webapp/WEB-INF/views/spring/resources/
