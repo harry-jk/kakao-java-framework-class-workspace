@@ -1,5 +1,6 @@
 package kr.ac.jejunu.hibernate;
 
+import kr.ac.jejunu.model.Comment;
 import kr.ac.jejunu.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -26,8 +27,10 @@ public class BasicHibernateTest {
     @Before
     public void setup() {
         Configuration configuration = new Configuration().configure("jejunu.cfg.xml");
-        configuration.addResource("User.hbm.xml");
-        configuration.addResource("Comment.hbm.xml");
+//        configuration.addResource("User.hbm.xml");
+//        configuration.addResource("Comment.hbm.xml");
+        configuration.addAnnotatedClass(User.class)
+                .addAnnotatedClass(Comment.class);
         StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
         sb.applySettings(configuration.getProperties());
         StandardServiceRegistry standardServiceRegistry = sb.build();
