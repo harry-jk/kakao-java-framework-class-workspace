@@ -9,14 +9,18 @@ import org.hibernate.cfg.Configuration;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by jhkang on 2016-06-12.
  */
 public class BasicHibernateTest {
+    private Logger logger = LoggerFactory.getLogger(BasicHibernateTest.class);
+
     SessionFactory sessionFactory;
 
     @Before
@@ -53,7 +57,9 @@ public class BasicHibernateTest {
         user.setPassword("1234");
         session.save(user);
 
+        logger.info("**************  get after save(start) ******************");
         User saveUser = session.get(User.class, user.getId());
+        logger.info("**************  get after save(end) ******************");
         assertThat(saveUser.getName(), is(user.getName()));
         assertThat(saveUser.getPassword(), is(user.getPassword()));
 
