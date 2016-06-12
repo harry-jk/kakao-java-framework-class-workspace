@@ -45,12 +45,12 @@ public class BasicHibernateTest {
     @Test
     public void getUserTest() {
         Session session = sessionFactory.openSession();
-        User user = session.get(User.class, 1);
+        User user = (User) session.get(User.class, 1);
         assertThat(user.getName(), is("허윤호"));
         assertThat(user.getPassword(), is("1234"));
-        user.getComments().forEach(comment -> {
-            logger.error(comment.getContent());
-        });
+//        user.getComments().forEach(comment -> {
+//            logger.error(comment.getContent());
+//        });
         session.close();
     }
 
@@ -65,7 +65,7 @@ public class BasicHibernateTest {
         session.save(user);
 
         logger.info("**************  get after save(start) ******************");
-        User saveUser = session.get(User.class, user.getId());
+        User saveUser = (User) session.get(User.class, user.getId());
         logger.info("**************  get after save(end) ******************");
         assertThat(saveUser.getName(), is(user.getName()));
         assertThat(saveUser.getPassword(), is(user.getPassword()));
