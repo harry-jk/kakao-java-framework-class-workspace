@@ -27,6 +27,7 @@ public class BasicHibernateTest {
     public void setup() {
         Configuration configuration = new Configuration().configure("jejunu.cfg.xml");
         configuration.addResource("User.hbm.xml");
+        configuration.addResource("Comment.hbm.xml");
         StandardServiceRegistryBuilder sb = new StandardServiceRegistryBuilder();
         sb.applySettings(configuration.getProperties());
         StandardServiceRegistry standardServiceRegistry = sb.build();
@@ -44,6 +45,9 @@ public class BasicHibernateTest {
         User user = session.get(User.class, 1);
         assertThat(user.getName(), is("허윤호"));
         assertThat(user.getPassword(), is("1234"));
+        user.getComments().forEach(comment -> {
+            logger.error(comment.getContent());
+        });
         session.close();
     }
 
