@@ -2,7 +2,6 @@ package kr.ac.jejunu.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by jhkang on 2016-06-12.
@@ -16,9 +15,9 @@ public class User implements Serializable {
     private String name;
     private String password;
 
-    @JoinColumn(name = "userinfo_id")
-    @OneToMany
-    private List<Comment> comments;
+//    @JoinColumn(name = "userinfo_id")
+//    @OneToMany
+//    private List<Comment> comments;
 
     public Integer getId() {
         return id;
@@ -44,11 +43,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 }
